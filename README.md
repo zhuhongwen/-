@@ -2,11 +2,12 @@
 
 ## 如何使用?
 ```bash
-git clone git@github.com:huoqishi/bxg-template.git
+git clone git@github.com:huoqishi/bxg.git
 ```
 ```bash
-cd bxg-template
+cd bxg
 ```
 ```bash
 npm install
 ```
+
