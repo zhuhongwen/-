@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>学IT - 后台管理系统</title>
+    <link rel="stylesheet" href="../../node_modules/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../node_modules/font-awesome/css/font-awesome.css">
+    <link rel="stylesheet" href="../../node_modules/nprogress/nprogress.css">
+    <link rel="stylesheet" href="../../assets/css/index.css">
+</head>
+<body>
+    <!-- 登录 -->
+    <div class="login">
+        <div class="login-wrap">
+            <div class="avatar">
+                <img src="../../assets/img/monkey.png" class="img-circle" alt="">
+            </div>
+            <form action="" class="col-xs-offset-1 col-xs-10">
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon">
+                        <i class="fa fa-user"></i>
+                    </span>
+                    <input id="name" type="text" class="form-control" placeholder="用户名"
+                    value="前端学院">
+                </div>
+                <div class="input-group input-group-lg">
+                    <span class="input-group-addon">
+                        <i class="fa fa-key"></i>
+                    </span>
+                    <input id="pass" type="password" class="form-control" placeholder="密码"
+                    value="123456">
+                </div>
+                <button type="submit" class="btn btn-lg btn-primary btn-block">登 录</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
+<!--1.引包-->
+<script src="/node_modules/requirejs/require.js"></script>
+<script>
+    // 2. 配置
+    require.config({
+        baseUrl: '/node_modules',
+        paths: {
+            jquery: 'jquery/dist/jquery',
+            cookie: 'jquery.cookie/jquery.cookie'
+        }
+    })
+    // 3. 引入入口文件
+    require(['/assets/js/index/login.js'])
+</script>
