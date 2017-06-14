@@ -10,4 +10,4 @@ cd bxg
 ```bash
 npm install
 ```
-
+嘻嘻，我是小明，我依赖于别人的说法大

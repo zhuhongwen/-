@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="../../node_modules/font-awesome/css/font-awesome.css">
     <link rel="stylesheet" href="../../node_modules/nprogress/nprogress.css">
     <link rel="stylesheet" href="../../assets/css/index.css">
+    <link rel="stylesheet" href="/node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker.css">
+
 </head>
 
 <body>
@@ -149,25 +151,25 @@
                         <div class="form-group">
                             <label for="" class="col-xs-3 control-label">姓名</label>
                             <div class="col-xs-4">
-                                <input type="text" class="form-control input-sm" placeholder="讲师名称">
+                                <input name="tc_name" type="text" class="form-control input-sm" placeholder="讲师名称">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="" class="col-xs-3 control-label">密码</label>
                             <div class="col-xs-4">
-                                <input type="password" class="form-control input-sm">
+                                <input name="tc_pass" type="password" class="form-control input-sm">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="" class="col-xs-3 control-label">入职时间</label>
                             <div class="col-xs-4">
-                                <input type="text" class="form-control input-sm">
+                                <input name="tc_join_date" type="text" class="form-control input-sm">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="" class="col-xs-3 control-label">类型</label>
                             <div class="col-xs-2">
-                                <select name="" class="form-control input-sm">
+                                <select name="tc_type" class="form-control input-sm">
                                     <option value="">讲师</option>
                                     <option value="">管理员</option>
                                 </select>
@@ -177,16 +179,16 @@
                             <label for="" class="col-xs-3 control-label">性别</label>
                             <div class="col-xs-4">
                                 <label class="radio-inline">
-                                    <input type="radio" checked> 男
+                                    <input name="tc_gender" value="0" type="radio" checked> 男
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio"> 女
+                                    <input name="tc_gender" type="radio" value="1"> 女
                                 </label>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-xs-7">
-                                <a class="btn btn-success btn-sm pull-right"> 添 加 </a>
+                                <a class="tc-add btn btn-success btn-sm pull-right"> 添 加 </a>
                             </div>
                         </div>
                     </form>
@@ -197,3 +199,10 @@
 </body>
 
 </html>
+<!--1.引包-->
+<script src="/node_modules/requirejs/require.js"></script>
+<!--2.配置-->
+<!--3.入口文件-->
+<script>
+    require(['/assets/js/config.js','/assets/js/common.js','/assets/js/teacher/add.js'])
+</script>

@@ -8,15 +8,24 @@
  */
 // 先记住，用define包裹一下
 // 由cookie插件是把方法放到了$上,所以也要引入一下jquery
+
+// 页面加载后，关闭进度条
 define(['cookie', 'jquery', 'nprogress'], function (x, $, NProgress) {
   // 展示进度条
   NProgress.start()
+  // 赋值之前，onload事件可以已经触发了
+  // window.onload = function () {
+  // }
 
-  // 页面加载后，关闭进度条
-  window.onload = function () {
-    window.alert(1)
+  // 通过jquery的Ajax的全局事件,来给每一次ajax请求添加进度条
+  // 应该在所有ajax请求开始之前执行Nprogress.start()
+  // 应该在所有ajax请求结束之后执行Nprogress.done()
+  $(document).ajaxStart(function () {
+    NProgress.start()  // xhr.send, xhr.onreadstatechange
+  })
+  $(document).ajaxStop(function () {
     NProgress.done()
-  }
+  })
 
   // 3. 要检测用户的登陆状态，如果没有登陆，则跳转到登陆页面
   // 3.1 要判断用户有没有登陆
@@ -81,6 +90,8 @@ define(['cookie', 'jquery', 'nprogress'], function (x, $, NProgress) {
     }
     $.ajax(options)
   })
+  // 结束进度条
+  NProgress.done()
 })
 // 1.引包
 // 2.配置
@@ -89,3 +100,4 @@ define(['cookie', 'jquery', 'nprogress'], function (x, $, NProgress) {
 
 
 // https://stackoverflow.com/ 程序问答网站
+

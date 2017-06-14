@@ -180,7 +180,7 @@
                                 <td>男</td>
                                 <td>15901256171</td>
                                 <td>
-                                    <a href="#teacherModal" data-toggle="modal" class="btn btn-info btn-xs">查 看</a>
+                                    <a id="showmodal" data-toggle="modal" class="btn btn-info btn-xs">查 看</a>
                                     <a href="./edit.html" class="btn btn-info btn-xs">编 辑</a>
                                     <a href="javascript::" class="btn btn-warning btn-xs">注 销</a>
                                 </td>
@@ -193,6 +193,7 @@
     </div>
 
     <!-- 模态框 添加课程 -->
+    
     <div class="modal fade" id="teacherModal">
         <div class="modal-dialog" style="width: 750px;">
             <div class="panel panel-default">
@@ -202,7 +203,7 @@
                 </div>
                 <div class="panel-body">
                     <table class="table table-bordered table-condensed">
-                        <tbody>
+                        <tbody id="modal-list">
                             <tr>
                                 <th>姓名:</th>
                                 <td>天下二</td>
@@ -251,25 +252,44 @@
             </div>
         </div>
     </div>
+    
     <script id="tmpl-list" type="text/html">
-        {{each list as item}}
-        <tr tc-id="{{item.tc_id}}">
-            <td>{{item.tc_id}}</td>
-            <td>{{item.tc_name}}</td>
-            <td>{{item.tc_roster}}</td>
-            <td>{{getAge(item.tc_birthday)}}</td>
-            <td>{{item.tc_gender}}</td>
-            <td>{{item.tc_cellphone}}</td>
+        <!-- $value表示数据中的数据, 如果不想用$value，可以改
+        each list as item // 将$value改变为了item-->
+        {{each list}}
+        <tr tc-id="{{$value.tc_id}}" tc-status="{{$value.tc_status}}">
+            <td>{{$index}}</td>
+            <td>{{$value.tc_name}}</td>
+            <td>{{$value.tc_roster}}</td>
+            <!-- 表示调用 template.defaults.imports.getAge($value.tc_birthday)-->
+            <!--是把|线左边的数据传递给|线右边的方法, 最终在这里呈现的数据，不是|线左边的数据
+            而是|右边的方法的返回值-->
+            <td>{{$value.tc_birthday|getAge}}</td>
+            <td>{{$value.tc_gender}}</td>
+            <td>{{$value.tc_cellphone}}</td>
             <td>
-                <a href="javascript:" data-toggle="modal" class="preview btn btn-info btn-xs">查 看</a>
-                <a href="/views/teacher/edit.html" class="btn btn-info btn-xs">编 辑</a>
-                <a status="{{item.tc_status}}" href="javascript:" class="start-stop btn btn-warning btn-xs">
-                {{item.tc_status === '0' ? '注销' : '启用'}}
+                <a  href="javascript:;" class=" showmodal preview btn btn-info btn-xs">查 看</a>
+                <a href="/views/teacher/edit.html?tc_id={{$value.tc_id}}" class="btn btn-info btn-xs">编 辑</a>
+            <a status="{{$value.tc_status}}" href="javascript:" class="logout start-stop btn btn-warning btn-xs">
+                <!--如果为0 则显示注销-->
+                <!--如果值是0, 讲师当前的状态是没有被注销的状态-->
+                {{$value.tc_status === '0' ? '注销' : '启用'}}
             </a>
             </td>
         </tr>
         {{/each}}
     </script>
 </body>
-
 </html>
+<!--1.引包RequireJS-->
+<script src="/node_modules/requirejs/require.js"></script>
+<script>
+    // 2. 配置， 我们是把配置的代码放到的单独的config.js中
+    // 3. 引入入口文件
+    // common.js是每个页面，都会公用的代码(功能)
+    // 获取头像，展示导航菜单
+
+    // list.js 是这个页面自己单独功能代码，和其他页面的代码是不同的
+    require(['/assets/js/config.js','/assets/js/common.js', '/assets/js/teacher/list.js'])
+</script>
+
