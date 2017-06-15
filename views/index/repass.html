@@ -145,19 +145,19 @@
                         <div class="form-group">
                             <label for="" class="col-xs-3 control-label">原密码</label>
                             <div class="col-xs-4">
-                                <input type="text" class="form-control input-sm">
+                                <input name="tc_pass" type="text" class="form-control input-sm">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="" class="col-xs-3 control-label">新密码</label>
                             <div class="col-xs-4">
-                                <input type="password" class="form-control input-sm">
+                                <input name="tc_new_pass" type="password" class="form-control input-sm">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="" class="col-xs-3 control-label">确认密码</label>
                             <div class="col-xs-4">
-                                <input type="text" class="form-control input-sm">
+                                <input name="tc_confirm_pass" type="text" class="form-control input-sm">
                             </div>
                         </div>
                         <div class="form-group">
@@ -171,5 +171,17 @@
         </div>
     </div>
 </body>
-
 </html>
+<!--1.处理requirejs-->
+<!--1.1引包-->
+<!--1.2配置-->
+<!--1.3入口-->
+<!--1.4在入口文件中用define包裹-->
+<!--1.5在define方法，把需要使用的包引入-->
+<!--1.6开始实现功能-->
+<!--1.7使用jquery-validation插件对表单进行验证-->
+<!--1.8验证完成之后，使用jquery-form插件提交数据给后端 -->
+<script src="/node_modules/requirejs/require.js"></script>
+<script>
+    require(['/assets/js/config.js', '/assets/js/common.js', '/assets/js/index/repass.js'])
+</script>

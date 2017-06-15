@@ -4,12 +4,13 @@
  * 2.根据这个tc_id发请求得到讲师的数据
  * 3.点击保存按钮，把讲师新的数据发给后端
  */
-define(['jquery', 'template', 'datepicker'], function ($, template) {
+define(['jquery', 'template', 'datepicker', 'locales', 'validation', 'form'], function ($, template) {
+
   // 获取讲师信息并展示
   getDateShow()
 
   // 注册保存按钮事件，点击后发送form中的数据给后端
-  saveDate()
+  // saveDate()
 
 // $(input).datepicker()
 
@@ -48,7 +49,47 @@ define(['jquery', 'template', 'datepicker'], function ($, template) {
         $('form').html(html)
         // 日期插件初始化
         // 要保证当这个.tc-date存在时，才能执行这个方法
-        $('.tc-date').datepicker({format: 'yyyy/mm/dd'})
+        $('.tc-date').datepicker({format: 'yyyy/mm/dd', language: 'zh-CN'})
+
+        // 初始化表单验证插件，为什么我们把这个初始化的方法写在这个success函数里面?
+        $('form').validate({
+          submitHandler: function () {
+            // 验证成功后，且我们触发了表单的提前
+            // 这里默认事件已经禁止了
+            var options = {
+              url: '/api/teacher/update',
+              type: 'post',
+              data: {tc_id: getArg().tc_id},
+              success: function (data) {
+                if (data.code === 200) {
+                  window.alert('修改成功哦!')
+                }
+              }
+            }
+            // 是表单中的数据发给后端!
+            $('form').ajaxSubmit(options)
+          },
+          rules: {
+            tc_name: {
+              required: true,
+              rangelength: [2, 10]
+            },
+            tc_join_date: {
+              required: true,
+              date: true
+            }
+          },
+          messages: {
+            tc_name: {
+              required: '用户名不能为空',
+              rangelength: '用户名长度必需是2-10， 包含2和10'
+            },
+            tc_join_date: {
+              required: '日期不能为空',
+              date: '要符合日期的格式'
+            }
+          }
+        })
       }
     }
     $.ajax(options)
